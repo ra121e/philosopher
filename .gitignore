@@ -1,2 +1,6 @@
-.out
+.gitignore
+*.a
+*.out
 *.o
+*.pdf
+philisopher
