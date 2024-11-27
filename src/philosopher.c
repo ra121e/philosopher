@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/11/27 13:39:18 by athonda          ###   ########.fr       */
+/*   Updated: 2024/11/27 15:23:32 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	*life(void *arg)
 	printf("epoch :%d %d\n", (int)tv.tv_sec, (int)tv.tv_usec);
 	id = *(int *)arg;
 	if (id == 1)
-		sleep(1);
+		usleep(100);
 	if (id == 2)
-		sleep(2);
+		usleep(100);
 	if (id == 3)
-		sleep(3);
+		usleep(100);
 	if (id == 4)
-		sleep(4);
+		usleep(100);
 
 	gettimeofday(&now, NULL);
 	time_stamp_s = (int)(now.tv_sec) - (int)(tv.tv_sec);
