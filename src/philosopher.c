@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/11 15:30:29 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/11 18:10:46 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int ac, char **av)
 	if (init_mutex(&m))
 		return (0);
 	set_arg(&m, av);
-	m.epoch = get_time();
+	m.start = get_time();
 	i = 1;
 	while (i <= m.nb_philo)
 	{

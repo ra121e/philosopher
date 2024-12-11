@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/11 15:33:18 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/11 16:45:32 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,21 @@
 
 typedef struct s_admin t_admin;
 typedef struct s_philo t_philo;
+typedef enum e_status t_status;
+
+enum e_status
+{
+	THINKING,
+	EATING,
+	SLEEPING,
+};
 
 struct s_philo
 {
 	int			id;
 	long		start;
 	pthread_t	pt;
+	t_status	status;
 	struct timeval tv;
 	int	counter;
 	t_admin		*m;
@@ -33,6 +42,7 @@ struct s_philo
 struct	s_admin
 {
 	long			epoch;
+	long			start;
 	unsigned int	nb_philo;
 	long			time_die;
 	long			time_eat;

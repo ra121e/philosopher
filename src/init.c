@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/11 15:30:02 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/11 16:44:51 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	init_philo(t_philo *p, int i, t_admin *m)
 	p->id = i;
 	p->start = 0;
 	p->pt = 0;
+	p->status = 0;
 	p->tv.tv_sec = 0;
 	p->tv.tv_usec = 0;
 	p->counter = 0;
