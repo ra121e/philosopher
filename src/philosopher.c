@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/11 18:10:46 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/11 21:51:47 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int ac, char **av)
 		error_exit("wrong argument: ex) 5 800 200 200 [3]\n");
 		return (1);
 	}
-	init_admin(&m);
+	init_admin(&m, &p[0]);
 	if (init_mutex(&m))
 		return (0);
 	set_arg(&m, av);
@@ -98,7 +98,11 @@ int	main(int ac, char **av)
 		usleep(100);
 		i++;
 	}
-	sleep(10);
+	ret = pthread_create(&m.pt_monitor, NULL, &monitoring, &m);
+	if (ret != 0)
+		return (0);
+	sleep(5);
+	pthread_join(m.pt_monitor, NULL);
 	i = 0;
 	while (i <= m.nb_philo)
 	{

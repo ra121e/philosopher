@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/11 16:45:32 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/11 21:02:06 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ struct s_philo
 {
 	int			id;
 	long		start;
+	long		last_supper;
 	pthread_t	pt;
 	t_status	status;
 	struct timeval tv;
@@ -49,15 +50,17 @@ struct	s_admin
 	long			time_sleep;
 	int				dead;
 	int				max_eat;
+	pthread_t		pt_monitor;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	stick[200];
 	t_philo			*p;
 };
 
-void	init_admin(t_admin *m);
+void	init_admin(t_admin *m, t_philo *p);
 void	init_philo(t_philo *p, int i, t_admin *m);
 int		init_mutex(t_admin *m);
 long	ft_atol(char *str);
 void	error_exit(char *str);
 void	*constraint(void *arg);
+void	*monitoring(void *arg);
 long	get_time(void);
