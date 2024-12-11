@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:02:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/10 21:23:24 by athonda          ###   ########.fr       */
+/*   Created: 2024/12/10 13:54:38 by athonda           #+#    #+#             */
+/*   Updated: 2024/12/10 13:55:08 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	error_exit(char *str)
+long	get_time(void)
 {
-	while (*str)
-		write(2, str++, 1);
-}
-
-
-void	err(char *str)
-{
-	while (*str)
-		write(2, str++, 1);
-	exit(EXIT_FAILURE);
+	struct timeval	tv;
+	gettimeofday(&tv, 0);
+	return ((long)tv.tv_sec * 1000 + (long)tv.tv_usec / 1000);
 }

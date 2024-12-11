@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 14:47:10 by athonda           #+#    #+#              #
-#    Updated: 2024/12/09 21:19:11 by athonda          ###   ########.fr        #
+#    Updated: 2024/12/10 13:55:50 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ SRC_DIR = src
 SRC_F	=	philosopher.c \
 			error.c \
 			util.c \
-			init.c
+			init.c \
+			constraint.c \
+			time.c
 SRC = $(SRC_F:%.c=$(SRC_DIR)/%.c)
 
 OBJ_DIR = obj

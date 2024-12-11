@@ -6,18 +6,12 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/09 21:18:49 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/11 15:30:29 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	err(char *str)
-{
-	while (*str)
-		write(2, str++, 1);
-	exit(EXIT_FAILURE);
-}
 
 /*
 void	tableware(t_philo *p)
@@ -66,44 +60,6 @@ void	tableware(t_philo *p)
 }
 */
 
-long	get_time(void)
-{
-	struct timeval	tv;
-	gettimeofday(&tv, 0);
-	return ((long)tv.tv_sec * 1000 + (long)tv.tv_usec / 1000);
-}
-
-void	*life(void *arg)
-{
-	//pthread_t	id;
-	long	now;
-	long	time;
-	int	sec;
-	t_philo	*p;
-
-	p = (t_philo *)arg;
-	sec = 500000;
-//	gettimeofday(&p->tv, NULL);
-	now = get_time();
-	p->start = now;
-	printf("epoch :%ld ID: %d\n", p->start, p->id);
-
-//	gettimeofday(&now, NULL);
-	now = get_time();
-	time = now - p->start;
-	printf("%ld %d: I have woken up\n", time, p->id);
-	usleep(sec);
-//	time_stamp_s = (int)(now.tv_sec) - (int)(p->tv.tv_sec);
-//	time_stamp_m = (int)(now.tv_usec) - (int)(p->tv.tv_usec);
-
-//	tableware(p);
-
-	now = get_time();
-	time = now - p->start;
-	printf("%ld %d: I am thinking\n", time, p->id);
-	usleep(sec);
-	return (NULL);
-}
 
 void	set_arg(t_admin *m, char **av)
 {
@@ -117,58 +73,34 @@ void	set_arg(t_admin *m, char **av)
 
 int	main(int ac, char **av)
 {
-	int	i;
-//	int	ret[NUM_PHILO];
+	unsigned int	i;
 	int	ret;
-	int	retval;
 	t_philo	p[200];
 	t_admin	m;
-//	int	epoch;
-	//struct timeval tv;
-	//pthread_mutex_t	*mutex;
-	//pthread_t	pt[NUM_PHILO];
-	//struct timezone tz;
-	//pthread_t	pt2;
 
-//	p = (t_philo *)malloc(sizeof (t_philo));
-//	if (!p)
-//		return (0);
-//	m = (t_admin *)malloc(sizeof (t_admin));
-//	if (!m)
-//		return (0);
-//	m->mutex = (pthread_mutex_t *)malloc(sizeof (pthread_mutex_t));
-//	if (m->mutex == NULL)
-//		return (0);
 	if (ac < 5 || ac > 6)
 	{
-		error_exit("wrong argument: 5 800 200 200 [3]\n");
+		error_exit("wrong argument: ex) 5 800 200 200 [3]\n");
 		return (1);
 	}
 	init_admin(&m);
+	if (init_mutex(&m))
+		return (0);
 	set_arg(&m, av);
-	retval = pthread_mutex_init(&m.mutex, NULL);
-	printf("retval: %d\n", retval);
-//	if (retval != 0)
-//	{
-//		free(m->mutex);
-//		return (0);
-//	}
 	m.epoch = get_time();
-	i = 0;
-	while (i < NUM_PHILO)
+	i = 1;
+	while (i <= m.nb_philo)
 	{
-		init_philo(&p[i]);
-		p[i].id = i;
-		ret = pthread_create(&p[i].pt, NULL, &life, &p[i]);
+		init_philo(&p[i], i, &m);
+		ret = pthread_create(&p[i].pt, NULL, &constraint, &p[i]);
+		if (ret != 0)
+			return (0);
 		usleep(100);
-		printf("return value: %d\n", ret);
-		printf("thread id: %ld\n", p[i].pt);
 		i++;
 	}
 	sleep(10);
-//	retval = pthread_mutex_destroy(m->mutex);
 	i = 0;
-	while (i < NUM_PHILO)
+	while (i <= m.nb_philo)
 	{
 		pthread_join(p[i].pt, NULL);
 		i++;
