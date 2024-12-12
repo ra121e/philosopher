@@ -6,17 +6,29 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/11 21:56:42 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/12 14:01:05 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	taking(t_philo *p)
+void	taking_left(t_philo *p)
 {
 	long	now;
 	long	time;
 
+	p->m->used[p->id - 1] = 1;
+	now = get_time();
+	time = now - p->m->start;
+	printf("%ld %d has taken a fork\n", time, p->id);
+}
+
+void	taking_right(t_philo *p)
+{
+	long	now;
+	long	time;
+
+	p->m->used[p->id % p->m->nb_philo] = 1;
 	now = get_time();
 	time = now - p->m->start;
 	printf("%ld %d has taken a fork\n", time, p->id);
@@ -85,20 +97,25 @@ void	*constraint(void *arg)
 	p->last_supper = p->m->start;
 	while (1)
 	{
-		if (p->id % 2 == 0)
-			usleep(100);
+		//if (p->id % 2 == 0)
+		//	usleep(100);
 		if (p->status != THINKING)
 			thinking(p);
-		if (pthread_mutex_lock(&p->m->stick[p->id - 1]) == 0)
+		if (!p->m->used[p->id - 1] && !p->m->used[p->id % p->m->nb_philo])
 		{
-			taking(p);
-			if (pthread_mutex_lock(&p->m->stick[p->id % p->m->nb_philo]) == 0)
+			if (pthread_mutex_lock(&p->m->stick[p->id - 1]) == 0)
 			{
-				taking(p);
-				eating(p);
-				pthread_mutex_unlock(&p->m->stick[p->id % p->m->nb_philo]);
+				taking_left(p);
+				if (pthread_mutex_lock(&p->m->stick[p->id % p->m->nb_philo]) == 0)
+				{
+					taking_right(p);
+					eating(p);
+					pthread_mutex_unlock(&p->m->stick[p->id % p->m->nb_philo]);
+					p->m->used[p->id % p->m->nb_philo] = 0;
+				}
+				pthread_mutex_unlock(&p->m->stick[p->id - 1]);
+				p->m->used[p->id - 1] = 0;
 			}
-			pthread_mutex_unlock(&p->m->stick[p->id - 1]);
 		}
 		if (p->status == EATING)
 			sleeping(p);

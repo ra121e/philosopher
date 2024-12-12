@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/11 20:52:45 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/12 13:47:54 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 int	init_mutex(t_admin *m)
 {
+	unsigned int	i;
 	int	retval;
 
-	retval = pthread_mutex_init(&m->mutex, NULL);
-	if (retval != 0)
-		return (1);
+	i = 0;
+	while (i <= m->nb_philo)
+	{
+		retval = pthread_mutex_init(&m->stick[i], NULL);
+		if (retval != 0)
+			return (1);
+		i++;
+	}
 	return (0);
 	// TODO protection
 }
 
 void	init_admin(t_admin *m, t_philo *p)
 {
+	unsigned int	i;
+
 	m->epoch = 0;
 	m->nb_philo = 0;
 	m->time_die = 0;
@@ -33,6 +41,12 @@ void	init_admin(t_admin *m, t_philo *p)
 	m->dead = 0;
 	m->max_eat = 0;
 	m->p = p;
+	i = 0;
+	while (i <= m->nb_philo)
+	{
+		m->used[i] = 0;
+		i++;
+	}
 }
 
 void	init_philo(t_philo *p, int i, t_admin *m)
