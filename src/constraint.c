@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/12 14:01:05 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/13 09:12:09 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,21 @@ void	*constraint(void *arg)
 	t_philo	*p;
 
 	p = (t_philo *)arg;
+	pthread_mutex_lock(&p->m->mutex);
+	pthread_mutex_unlock(&p->m->mutex);
+	printf("%ld %d m.start by philo\n", p->m->start, p->id);
 	p->last_supper = p->m->start;
+	printf("%ld %d last_supper by philo\n", p->last_supper, p->id);
 	while (1)
 	{
-		//if (p->id % 2 == 0)
-		//	usleep(100);
+		if (p->id % 2 == 0)
+			usleep(100);
 		if (p->status != THINKING)
 			thinking(p);
-		if (!p->m->used[p->id - 1] && !p->m->used[p->id % p->m->nb_philo])
+		if (p->m->used[p->id - 1] == 0 && p->m->used[p->id % p->m->nb_philo] == 0)
 		{
+			p->m->used[p->id - 1] = 1;
+			p->m->used[p->id % p->m->nb_philo] = 1;
 			if (pthread_mutex_lock(&p->m->stick[p->id - 1]) == 0)
 			{
 				taking_left(p);

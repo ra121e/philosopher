@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/12 11:59:47 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/13 08:23:44 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 	set_arg(&m, av);
 	if (init_mutex(&m))
 		return (0);
-	m.start = get_time();
+	pthread_mutex_lock(&m.mutex);
 	i = 1;
 	while (i <= m.nb_philo)
 	{
@@ -53,7 +53,8 @@ int	main(int ac, char **av)
 	ret = pthread_create(&m.pt_monitor, NULL, &monitoring, &m);
 	if (ret != 0)
 		return (0);
-	//sleep(5);
+	m.start = get_time();
+	pthread_mutex_unlock(&m.mutex);
 	pthread_join(m.pt_monitor, NULL);
 	i = 1;
 	while (i <= m.nb_philo)
