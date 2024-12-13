@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/13 19:05:45 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:14:55 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,7 @@ void	*monitoring(void *arg)
 			time = now - m->start;
 			if (elapse_time > m->time_die)
 			{
-				printf("%ld %d now by m\n", now, philo->id);
-				printf("%ld %d m->start by m\n", m->start, philo->id);
-				printf("%ld %d last_supper by m\n", philo->last_supper, philo->id);
-				printf("%ld %d elapse_time by m\n", elapse_time, philo->id);
-				printf("%ld %d time_die by m\n", m->time_die, philo->id);
-				printf("%ld %d died by m\n", time, philo->id);
+				printf("%ld %d died\n", time, philo->id);
 				m->dead = 1;
 				return (NULL);
 			}

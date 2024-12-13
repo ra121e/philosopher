@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/13 18:49:37 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:14:01 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ void	*constraint(void *arg)
 	pthread_mutex_lock(&p->m->mutex);
 	p->last_supper = p->m->start;
 	pthread_mutex_unlock(&p->m->mutex);
-	printf("%ld %d m.start by philo\n", p->m->start, p->id);
-	printf("%ld %d last_supper by philo\n", p->last_supper, p->id);
 	if (p->id % 2 == 0)
 		usleep(7000);
 	while (1)
@@ -128,10 +126,7 @@ void	*constraint(void *arg)
 		if (p->status == EATING)
 			sleeping(p);
 		if (p->m->dead == 1)
-		{
-			found_dead(p);
 			return (NULL);
-		}
 	}
 	return (NULL);
 }
