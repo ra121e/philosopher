@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/13 09:56:20 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:29:34 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	*monitoring(void *arg)
 	usleep(5000);
 	while (1)
 	{
-		now = get_time();
 		i = 0;
 		philo = m->p;
 		while (++i <= m->nb_philo)
 		{
 			philo++;
+			now = get_time();
 			elapse_time = now - philo->last_supper;
 			time = now - m->start;
 			if (elapse_time > m->time_die)
