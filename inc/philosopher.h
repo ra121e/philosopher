@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/12 13:55:35 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:46:39 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ struct	s_admin
 	long			time_sleep;
 	int				dead;
 	int				max_eat;
-	int				used[200];
+	int				used[250];
 	pthread_t		pt_monitor;
 	pthread_mutex_t	mutex;
-	pthread_mutex_t	stick[200];
+	pthread_mutex_t	stick[250];
 	t_philo			*p;
 };
 

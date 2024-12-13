@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/13 17:29:34 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/13 19:05:45 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*monitoring(void *arg)
 	philo = m->p;
 	pthread_mutex_lock(&m->mutex);
 	pthread_mutex_unlock(&m->mutex);
-	usleep(5000);
+	usleep(10000);
 	while (1)
 	{
 		i = 0;

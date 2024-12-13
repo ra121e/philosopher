@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/13 08:23:44 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:42:22 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 {
 	unsigned int	i;
 	int	ret;
-	t_philo	p[200];
+	t_philo	p[250];
 	t_admin	m;
 
 	if (ac < 5 || ac > 6)

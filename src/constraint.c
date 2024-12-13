@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/13 17:37:32 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:49:37 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	thinking(t_philo *p)
 	printf("%ld %d is thinking\n", time, p->id);
 	p->status = THINKING;
 	if (p->id % 2 == 0)
-		usleep(5000);
+		usleep(7000);
 }
 
 void	sleeping(t_philo *p)
@@ -101,8 +101,8 @@ void	*constraint(void *arg)
 	pthread_mutex_unlock(&p->m->mutex);
 	printf("%ld %d m.start by philo\n", p->m->start, p->id);
 	printf("%ld %d last_supper by philo\n", p->last_supper, p->id);
-		if (p->id % 2 == 0)
-			usleep(5000);
+	if (p->id % 2 == 0)
+		usleep(7000);
 	while (1)
 	{
 		if (p->status != THINKING)
