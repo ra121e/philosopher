@@ -6,13 +6,33 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/14 20:19:30 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/14 21:38:33 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	checking_philo(t_admin *m)
+int	checking_full(t_admin *m)
+{
+	unsigned int	i;
+	t_philo			*philo;
+	unsigned int	full;
+
+	philo = m->p;
+	full = 0;
+	i = 0;
+	while (++i <= m->nb_philo)
+	{
+		philo++;
+		if (philo->counter >= m->max_eat)
+			full++;
+		if (full >= m->nb_philo)
+			return (1);
+	}
+	return (0);
+}
+
+int	checking_die(t_admin *m)
 {
 	unsigned int	i;
 	t_philo			*philo;
@@ -28,7 +48,7 @@ int	checking_philo(t_admin *m)
 		now = get_time();
 		elapse_time = now - philo->last_supper;
 		time = now - m->start;
-		if (elapse_time > m->time_die)
+		if (elapse_time > m->time_die && philo->counter < m->max_eat)
 		{
 			printf("%ld %d died\n", time, philo->id);
 			m->dead = 1;
@@ -60,7 +80,9 @@ void	*monitoring(void *arg)
 	usleep(10000);
 	while (1)
 	{
-		if (checking_philo(m) == 1)
+		if (checking_die(m) == 1)
+			return (NULL);
+		if (m->max_eat > 0 && checking_full(m) == 1)
 			return (NULL);
 	}
 }

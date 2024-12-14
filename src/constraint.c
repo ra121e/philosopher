@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/14 20:31:42 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/14 21:40:16 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	*constraint(void *arg)
 			thinking(p);
 		if (p->m->dead != 1)
 			collision(p);
+		if (p->m->max_eat > 0 && p->counter >= p->m->max_eat)
+			return (NULL);
 		if (p->status == EATING && p->m->dead != 1)
 			sleeping(p);
 		if (p->m->dead == 1)
