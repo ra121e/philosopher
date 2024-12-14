@@ -6,20 +6,31 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/14 20:20:52 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/14 20:57:47 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	set_arg(t_admin *m, char **av)
+int	set_arg(t_admin *m, char **av)
 {
 	m->nb_philo = ft_atol(av[1]);
+	if (m->nb_philo > 200)
+	{
+		printf("Do not test with more than 200 philo!\n");
+		return (0);
+	}
 	m->time_die = ft_atol(av[2]);
 	m->time_eat = ft_atol(av[3]);
 	m->time_sleep = ft_atol(av[4]);
 	if (av[5])
 		m->max_eat = ft_atol(av[5]);
+	if (m->time_die < 60 || m->time_eat < 60 || m->time_sleep < 60)
+	{
+		printf("Do not test with time set to values lower than 60 ms!\n");
+		return (0);
+	}
+	return (1);
 }
 
 /**
@@ -68,7 +79,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	init_admin(&m, &p[0]);
-	set_arg(&m, av);
+	if (!set_arg(&m, av))
+		return (0);
 	if (init_mutex(&m))
 		return (0);
 	start_simulation(&m, p);
