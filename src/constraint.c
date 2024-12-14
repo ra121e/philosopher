@@ -6,81 +6,28 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/13 19:14:01 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/14 20:31:42 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	taking_left(t_philo *p)
+void	collision(t_philo *p)
 {
-	long	now;
-	long	time;
-
-	p->m->used[p->id - 1] = 1;
-	now = get_time();
-	time = now - p->m->start;
-	printf("%ld %d has taken a fork\n", time, p->id);
-}
-
-void	taking_right(t_philo *p)
-{
-	long	now;
-	long	time;
-
-	p->m->used[p->id % p->m->nb_philo] = 1;
-	now = get_time();
-	time = now - p->m->start;
-	printf("%ld %d has taken a fork\n", time, p->id);
-}
-
-void	eating(t_philo *p)
-{
-	long	now;
-	long	time;
-
-	now = get_time();
-	time = now - p->m->start;
-	printf("%ld %d is eating\n", time, p->id);
-	p->last_supper = now;
-	p->status = EATING;
-	p->counter++;
-	usleep(p->m->time_eat * 1000);
-}
-
-void	thinking(t_philo *p)
-{
-	long	now;
-	long	time;
-
-	now = get_time();
-	time = now - p->m->start;
-	printf("%ld %d is thinking\n", time, p->id);
-	p->status = THINKING;
-	if (p->id % 2 == 0)
-		usleep(7000);
-}
-
-void	sleeping(t_philo *p)
-{
-	long	now;
-	long	time;
-
-	now = get_time();
-	time = now - p->m->start;
-	printf("%ld %d is sleeping\n", time, p->id);
-	p->status = SLEEPING;
-	usleep(p->m->time_sleep * 1000);
-}
-
-void	found_dead(t_philo *p)
-{
-	long	now;
-	long	time;
-
-	now = get_time();
-	time = now - p->m->start;
-	printf("%ld %d found dead\n", time, p->id);
+	if (pthread_mutex_lock(&p->m->stick[p->id - 1]) == 0)
+	{
+		if (p->m->dead != 1)
+			taking_left(p);
+		if (pthread_mutex_lock(&p->m->stick[p->id % p->m->nb_philo]) == 0)
+		{
+			if (p->m->dead != 1)
+				taking_right(p);
+			if (p->m->dead != 1)
+				eating(p);
+			pthread_mutex_unlock(&p->m->stick[p->id % p->m->nb_philo]);
+		}
+		pthread_mutex_unlock(&p->m->stick[p->id - 1]);
+	}
 }
 
 /**
@@ -100,30 +47,14 @@ void	*constraint(void *arg)
 	p->last_supper = p->m->start;
 	pthread_mutex_unlock(&p->m->mutex);
 	if (p->id % 2 == 0)
-		usleep(7000);
+		usleep(5000);
 	while (1)
 	{
-		if (p->status != THINKING)
+		if (p->status != THINKING && p->m->dead != 1)
 			thinking(p);
-		if (p->m->used[p->id - 1] == 0 && p->m->used[p->id % p->m->nb_philo] == 0)
-		{
-			p->m->used[p->id - 1] = 1;
-			p->m->used[p->id % p->m->nb_philo] = 1;
-			if (pthread_mutex_lock(&p->m->stick[p->id - 1]) == 0)
-			{
-				taking_left(p);
-				if (pthread_mutex_lock(&p->m->stick[p->id % p->m->nb_philo]) == 0)
-				{
-					taking_right(p);
-					eating(p);
-					pthread_mutex_unlock(&p->m->stick[p->id % p->m->nb_philo]);
-					p->m->used[p->id % p->m->nb_philo] = 0;
-				}
-				pthread_mutex_unlock(&p->m->stick[p->id - 1]);
-				p->m->used[p->id - 1] = 0;
-			}
-		}
-		if (p->status == EATING)
+		if (p->m->dead != 1)
+			collision(p);
+		if (p->status == EATING && p->m->dead != 1)
 			sleeping(p);
 		if (p->m->dead == 1)
 			return (NULL);

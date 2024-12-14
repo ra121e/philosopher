@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 14:47:10 by athonda           #+#    #+#              #
-#    Updated: 2024/12/11 20:38:12 by athonda          ###   ########.fr        #
+#    Updated: 2024/12/14 20:39:30 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC_F	=	philosopher.c \
 			util.c \
 			init.c \
 			constraint.c \
+			friction.c \
 			time.c \
 			monitoring.c
 SRC = $(SRC_F:%.c=$(SRC_DIR)/%.c)

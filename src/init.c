@@ -6,16 +6,24 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/12 22:24:51 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/14 20:36:23 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
+/**
+ * @fn init_mutex(t_admin *m)
+ * @brief initialize mutex
+ * @param[in]	m pointer to general info struct
+ * @param[out]	int
+ * @note just use pthread_mutex_init()
+ */
+
 int	init_mutex(t_admin *m)
 {
 	unsigned int	i;
-	int	retval;
+	int				retval;
 
 	pthread_mutex_init(&m->mutex, NULL);
 	i = 0;
@@ -27,8 +35,15 @@ int	init_mutex(t_admin *m)
 		i++;
 	}
 	return (0);
-	// TODO protection
 }
+
+/**
+ * @fn init_admin(t_admin *m, t_philo *p)
+ * @brief initialize admin struct
+ * @param[in]	m pointer to general info struct
+ * @param[in]	p pointer to philo struct array
+ *
+ */
 
 void	init_admin(t_admin *m, t_philo *p)
 {
@@ -49,6 +64,15 @@ void	init_admin(t_admin *m, t_philo *p)
 		i++;
 	}
 }
+
+/**
+ * @fn init_philo(t_philo *p, int i, t_admin *m)
+ * @brief initialize philo struct array
+ * @param[in]	p pointer to philo array
+ * @param[in]	i index num of philo array
+ * @param[in]	m pointer to general info struct
+ * @note
+ */
 
 void	init_philo(t_philo *p, int i, t_admin *m)
 {
