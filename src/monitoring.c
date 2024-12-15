@@ -6,55 +6,37 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/14 21:38:33 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/15 11:42:02 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	checking_full(t_admin *m)
-{
-	unsigned int	i;
-	t_philo			*philo;
-	unsigned int	full;
-
-	philo = m->p;
-	full = 0;
-	i = 0;
-	while (++i <= m->nb_philo)
-	{
-		philo++;
-		if (philo->counter >= m->max_eat)
-			full++;
-		if (full >= m->nb_philo)
-			return (1);
-	}
-	return (0);
-}
-
 int	checking_die(t_admin *m)
 {
 	unsigned int	i;
-	t_philo			*philo;
+	unsigned int	nb_eating;
 	long			now;
 	long			time;
 	long			elapse_time;
 
-	philo = m->p;
+	nb_eating = 0;
 	i = 0;
-	while (++i <= m->nb_philo)
+	while (++i <= m->nb_philo && m->p[i].full == 0)
 	{
-		philo++;
 		now = get_time();
-		elapse_time = now - philo->last_supper;
+		elapse_time = now - m->p[i].last_supper;
 		time = now - m->start;
-		if (elapse_time > m->time_die && philo->counter < m->max_eat)
+		if (elapse_time > m->time_die)
 		{
-			printf("%ld %d died\n", time, philo->id);
+			printf("%ld %d died\n", time, m->p[i].id);
 			m->dead = 1;
 			return (1);
 		}
+		nb_eating++;
 	}
+	if (nb_eating == 0)
+		return (1);
 	return (0);
 }
 
@@ -81,8 +63,6 @@ void	*monitoring(void *arg)
 	while (1)
 	{
 		if (checking_die(m) == 1)
-			return (NULL);
-		if (m->max_eat > 0 && checking_full(m) == 1)
 			return (NULL);
 	}
 }

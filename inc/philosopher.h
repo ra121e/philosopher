@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/14 20:38:57 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/15 10:59:36 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ struct s_philo
 	t_status		status;
 	struct timeval	tv;
 	int				counter;
+	int				full;
 	t_admin			*m;
 };
 

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/14 20:31:06 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/15 11:00:02 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	eating(t_philo *p)
 	p->status = EATING;
 	p->counter++;
 	usleep(p->m->time_eat * 1000);
+	if (p->m->max_eat > 0 && p->counter >= p->m->max_eat)
+		p->full = 1;
 }
 
 void	thinking(t_philo *p)
