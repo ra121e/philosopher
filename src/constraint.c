@@ -6,13 +6,13 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/16 15:35:01 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/16 16:43:14 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	collision(t_philo *p)
+int	dining(t_philo *p)
 {
 	if (pthread_mutex_lock(&p->m->stick[p->id - 1]) == 0)
 	{
@@ -60,7 +60,7 @@ void	*constraint(void *arg)
 		if (p->status != THINKING && p->m->dead != 1)
 			thinking(p);
 		if (p->m->dead != 1)
-			if (collision(p) == 1)
+			if (dining(p) == 1)
 				return (NULL);
 		if (p->status == EATING && p->m->dead != 1 && p->full != 1)
 			sleeping(p);
