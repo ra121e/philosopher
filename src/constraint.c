@@ -6,16 +6,22 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/15 11:32:37 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/15 23:12:39 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	collision(t_philo *p)
+int	collision(t_philo *p)
 {
 	if (pthread_mutex_lock(&p->m->stick[p->id - 1]) == 0)
 	{
+		if (p->m->nb_philo == 1)
+		{
+			taking_left(p);
+			usleep(p->m->time_die);
+			return (1);
+		}
 		if (p->m->dead != 1)
 			taking_left(p);
 		if (pthread_mutex_lock(&p->m->stick[p->id % p->m->nb_philo]) == 0)
@@ -28,6 +34,7 @@ void	collision(t_philo *p)
 		}
 		pthread_mutex_unlock(&p->m->stick[p->id - 1]);
 	}
+	return (0);
 }
 
 /**
@@ -53,7 +60,8 @@ void	*constraint(void *arg)
 		if (p->status != THINKING && p->m->dead != 1)
 			thinking(p);
 		if (p->m->dead != 1)
-			collision(p);
+			if (collision(p) == 1)
+				return (NULL);
 		if (p->status == EATING && p->m->dead != 1 && p->full != 1)
 			sleeping(p);
 		if (p->m->dead == 1 || p->full == 1)
