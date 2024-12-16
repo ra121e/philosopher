@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/15 23:12:39 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/16 15:35:01 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	*constraint(void *arg)
 	t_philo	*p;
 
 	p = (t_philo *)arg;
-	pthread_mutex_lock(&p->m->mutex);
+	pthread_mutex_lock(&p->m->mutex_start);
 	p->last_supper = p->m->start;
-	pthread_mutex_unlock(&p->m->mutex);
+	pthread_mutex_unlock(&p->m->mutex_start);
 	if (p->id % 2 == 0)
 		usleep(5000);
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/15 11:42:02 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/16 15:35:18 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	*monitoring(void *arg)
 	t_admin			*m;
 
 	m = (t_admin *)arg;
-	pthread_mutex_lock(&m->mutex);
-	pthread_mutex_unlock(&m->mutex);
+	pthread_mutex_lock(&m->mutex_start);
+	pthread_mutex_unlock(&m->mutex_start);
 	usleep(10000);
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/14 20:57:47 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/16 15:35:48 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	start_simulation(t_admin *m, t_philo *p)
 	unsigned int	i;
 	int				ret;
 
-	pthread_mutex_lock(&m->mutex);
+	pthread_mutex_lock(&m->mutex_start);
 	i = 1;
 	while (i <= m->nb_philo)
 	{
@@ -64,7 +64,7 @@ void	start_simulation(t_admin *m, t_philo *p)
 	if (ret != 0)
 		return ;
 	m->start = get_time();
-	pthread_mutex_unlock(&m->mutex);
+	pthread_mutex_unlock(&m->mutex_start);
 }
 
 int	main(int ac, char **av)
