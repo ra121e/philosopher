@@ -6,23 +6,19 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/16 15:35:18 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/19 00:30:33 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	checking_die(t_admin *m)
+int	dying(t_admin *m, unsigned int i)
 {
-	unsigned int	i;
-	unsigned int	nb_eating;
-	long			now;
-	long			time;
-	long			elapse_time;
+	long	now;
+	long	time;
+	long	elapse_time;
 
-	nb_eating = 0;
-	i = 0;
-	while (++i <= m->nb_philo && m->p[i].full == 0)
+	pthread_mutex_lock(&m->mutex_print);
 	{
 		now = get_time();
 		elapse_time = now - m->p[i].last_supper;
@@ -30,9 +26,27 @@ int	checking_die(t_admin *m)
 		if (elapse_time > m->time_die)
 		{
 			printf("%ld %d died\n", time, m->p[i].id);
-			m->dead = 1;
-			return (1);
+			pthread_mutex_lock(&m->mutex_dead);
+			m->dead = DEAD;
+			pthread_mutex_unlock(&m->mutex_dead);
+			return (pthread_mutex_unlock(&m->mutex_print), DEAD);
 		}
+	}
+	pthread_mutex_unlock(&m->mutex_print);
+	return (0);
+}
+
+int	checking_die(t_admin *m)
+{
+	unsigned int	i;
+	unsigned int	nb_eating;
+
+	nb_eating = 0;
+	i = 0;
+	while (++i <= m->nb_philo && m->p[i].full == 0)
+	{
+		if (dying(m, i) == 1)
+			return (DEAD);
 		nb_eating++;
 	}
 	if (nb_eating == 0)
@@ -59,7 +73,7 @@ void	*monitoring(void *arg)
 	m = (t_admin *)arg;
 	pthread_mutex_lock(&m->mutex_start);
 	pthread_mutex_unlock(&m->mutex_start);
-	usleep(10000);
+	usleep(60000);
 	while (1)
 	{
 		if (checking_die(m) == 1)

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/16 15:32:15 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/18 16:25:37 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <unistd.h>
 #include <sys/time.h>
 #define NUM_PHILO 5
+#define DEAD 1
+#define ALIVE 0
 
 typedef struct s_admin	t_admin;
 typedef struct s_philo	t_philo;
@@ -55,6 +57,7 @@ struct	s_admin
 	pthread_t		pt_monitor;
 	pthread_mutex_t	mutex_start;
 	pthread_mutex_t	mutex_print;
+	pthread_mutex_t	mutex_dead;
 	pthread_mutex_t	stick[250];
 	t_philo			*p;
 };
@@ -64,11 +67,12 @@ void	init_philo(t_philo *p, int i, t_admin *m);
 int		init_mutex(t_admin *m);
 long	ft_atol(char *str);
 void	error_exit(char *str);
-void	sleeping(t_philo *p);
-void	thinking(t_philo *p);
-void	eating(t_philo *p);
-void	taking_right(t_philo *p);
-void	taking_left(t_philo *p);
+int		sleeping(t_philo *p);
+int		thinking(t_philo *p);
+int		eating(t_philo *p);
+int		taking_right(t_philo *p);
+int		taking_left(t_philo *p);
+int		checking(t_philo *p);
 void	*constraint(void *arg);
 void	*monitoring(void *arg);
 long	get_time(void);
