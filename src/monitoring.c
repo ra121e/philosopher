@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/19 00:30:33 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/19 16:37:57 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	dying(t_admin *m, unsigned int i)
 	pthread_mutex_lock(&m->mutex_print);
 	{
 		now = get_time();
+		pthread_mutex_lock(&m->mutex_time);
 		elapse_time = now - m->p[i].last_supper;
+		pthread_mutex_unlock(&m->mutex_time);
 		time = now - m->start;
 		if (elapse_time > m->time_die)
 		{
@@ -73,7 +75,7 @@ void	*monitoring(void *arg)
 	m = (t_admin *)arg;
 	pthread_mutex_lock(&m->mutex_start);
 	pthread_mutex_unlock(&m->mutex_start);
-	usleep(60000);
+	usleep(5000);
 	while (1)
 	{
 		if (checking_die(m) == 1)

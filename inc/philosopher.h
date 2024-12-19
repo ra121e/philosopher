@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/18 16:25:37 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/19 16:34:15 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ struct	s_admin
 	pthread_mutex_t	mutex_start;
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_dead;
+	pthread_mutex_t	mutex_time;
 	pthread_mutex_t	stick[250];
 	t_philo			*p;
 };

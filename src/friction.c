@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/18 16:33:08 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/19 16:37:34 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ int	eating(t_philo *p)
 		if (checking(p) == DEAD)
 			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
 		now = get_time();
+		pthread_mutex_lock(&p->m->mutex_time);
 		time = now - p->m->start;
+		pthread_mutex_unlock(&p->m->mutex_time);
+		p->last_supper = now;
 		printf("%ld %d is eating\n", time, p->id);
 	}
 	pthread_mutex_unlock(&p->m->mutex_print);
-	p->last_supper = now;
 	p->status = EATING;
 	p->counter++;
 	usleep(p->m->time_eat * 1000);
