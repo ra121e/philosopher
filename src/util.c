@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:40:10 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/14 20:21:09 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/20 19:55:47 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ char	*check_num(char *str)
 	if (*str == '+')
 		str++;
 	else if (*str == '-')
-		error_exit("forbiddend negative number\n");
+		return (printf("forbiddend negative number\n"), NULL);
 	if (!ft_is_digit(*str))
-		error_exit("forbidden none number\n");
+		return (printf("forbidden none number\n"), NULL);
 	number = str;
 	while (ft_is_digit(*str++))
 		len++;
 	if (len > 10)
-		error_exit("number shoule be untill INT_MAX \n");
+		return (printf("number shoule be untill INT_MAX \n"), NULL);
 	return (number);
 }
 
@@ -68,6 +68,8 @@ long	ft_atol(char *str)
 
 	num = 0;
 	number = check_num(str);
+	if (number == NULL)
+		return (0);
 	while (*number)
 	{
 		num = num * 10 + *number - '0';

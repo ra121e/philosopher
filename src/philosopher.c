@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/19 00:48:42 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/20 19:45:10 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 int	set_arg(t_admin *m, char **av)
 {
 	m->nb_philo = ft_atol(av[1]);
+	if (m->nb_philo <= 0)
+	{
+		printf("philosopher number should be more than 0\n");
+		return (0);
+	}
 	if (m->nb_philo > 200)
 	{
 		printf("Do not test with more than 200 philo!\n");

@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 14:47:10 by athonda           #+#    #+#              #
-#    Updated: 2024/12/19 15:15:28 by athonda          ###   ########.fr        #
+#    Updated: 2024/12/20 19:24:57 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ INC_DIR = inc
 DEP = inc/philosopher.h
 
 IFLAGS = -Iinc
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra -fsanitize=thread
 
 $(NAME) : $(OBJ)
 	cc $(CFLAGS) $(OBJ) -o $(NAME)
