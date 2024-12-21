@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/19 16:34:15 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/21 16:29:18 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	init_admin(t_admin *m, t_philo *p);
 void	init_philo(t_philo *p, int i, t_admin *m);
 int		init_mutex(t_admin *m);
 long	ft_atol(char *str);
-void	error_exit(char *str);
 int		sleeping(t_philo *p);
 int		thinking(t_philo *p);
 int		eating(t_philo *p);

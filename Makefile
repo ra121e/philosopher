@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 14:47:10 by athonda           #+#    #+#              #
-#    Updated: 2024/12/21 15:43:08 by athonda          ###   ########.fr        #
+#    Updated: 2024/12/21 16:29:06 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME = philo
 
 SRC_DIR = src
 SRC_F	=	philosopher.c \
-			error.c \
 			util.c \
 			init.c \
 			constraint.c \

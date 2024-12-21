@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/21 15:44:12 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/21 16:32:19 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	taking_left(t_philo *p)
 			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
 		now = get_time();
 		time = now - p->m->start;
-		printf("%ld %d has taken a left fork\n", time, p->id);
+		printf("%ld %d has taken a fork\n", time, p->id);
 	}
 	pthread_mutex_unlock(&p->m->mutex_print);
 	return (0);
@@ -42,7 +42,7 @@ int	taking_right(t_philo *p)
 			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
 		now = get_time();
 		time = now - p->m->start;
-		printf("%ld %d has taken a right fork\n", time, p->id);
+		printf("%ld %d has taken a fork\n", time, p->id);
 	}
 	pthread_mutex_unlock(&p->m->mutex_print);
 	return (ALIVE);
