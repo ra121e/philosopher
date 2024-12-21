@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/21 13:44:28 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/21 15:44:12 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ int	thinking(t_philo *p)
 	}
 	pthread_mutex_unlock(&p->m->mutex_print);
 	p->status = THINKING;
-//	if (p->id % 2 == 0)
-//		usleep(7000);
+	usleep(5000);
 	return (0);
 }
 

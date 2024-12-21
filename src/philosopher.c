@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/20 19:45:10 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/21 16:16:10 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 	{
-		error_exit("wrong argument: ex) 5 800 200 200 [3]\n");
+		printf("wrong argument: ex) 5 800 200 200 [3]\n");
 		return (1);
 	}
 	init_admin(&m, &p[0]);

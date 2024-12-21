@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 14:47:10 by athonda           #+#    #+#              #
-#    Updated: 2024/12/21 14:16:00 by athonda          ###   ########.fr        #
+#    Updated: 2024/12/21 15:43:08 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,19 +19,19 @@ SRC_F	=	philosopher.c \
 			init.c \
 			constraint.c \
 			friction.c \
+			observation.c \
 			time.c \
 			monitoring.c
 SRC = $(SRC_F:%.c=$(SRC_DIR)/%.c)
 
 OBJ_DIR = obj
 OBJ =	$(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC_F))
-#OBJ = $(OBJ_F:%.o=$(OBJ_DIR)/%.o)
 
 INC_DIR = inc
 DEP = inc/philosopher.h
 
 IFLAGS = -Iinc
-CFLAGS = -g -Wall -Werror -Wextra -fsanitize=thread
+CFLAGS = -g -Wall -Werror -Wextra
 
 $(NAME) : $(OBJ)
 	cc $(CFLAGS) $(OBJ) -o $(NAME)
