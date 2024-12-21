@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/19 15:17:25 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/21 14:14:55 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ int	solo_dining(t_philo *p)
 	return (0);
 }
 
-int	dining(t_philo *p)
+int	dining_left(t_philo *p)
 {
 	pthread_mutex_lock(&p->m->stick[p->id - 1]);
 	{
-		if (solo_dining(p) == 1)
-			return (pthread_mutex_unlock(&p->m->stick[p->id - 1]), 1);
 		if (taking_left(p))
 			return (pthread_mutex_unlock(&p->m->stick[p->id - 1]), 1);
 		pthread_mutex_lock(&p->m->stick[p->id % p->m->nb_philo]);
@@ -48,6 +46,49 @@ int	dining(t_philo *p)
 	}
 	pthread_mutex_unlock(&p->m->stick[p->id - 1]);
 	return (0);
+}
+
+int	dining_right(t_philo *p)
+{
+	pthread_mutex_lock(&p->m->stick[p->id % p->m->nb_philo]);
+	{
+		if (taking_right(p))
+			return (pthread_mutex_unlock(&p->m->stick[p->id % p->m->nb_philo]), 1);
+		pthread_mutex_lock(&p->m->stick[p->id - 1]);
+		{
+			if (taking_left(p))
+			{
+				pthread_mutex_unlock(&p->m->stick[p->id - 1]);
+				return (pthread_mutex_unlock(&p->m->stick[p->id % p->m->nb_philo]), 1);
+			}
+			if (eating(p))
+			{
+				pthread_mutex_unlock(&p->m->stick[p->id - 1]);
+				return (pthread_mutex_unlock(&p->m->stick[p->id % p->m->nb_philo]), 1);
+			}
+		}
+		pthread_mutex_unlock(&p->m->stick[p->id - 1]);
+	}
+	pthread_mutex_unlock(&p->m->stick[p->id % p->m->nb_philo]);
+	return (0);
+}
+
+int	dining(t_philo *p)
+{
+	if (solo_dining(p) == 1)
+		return (pthread_mutex_unlock(&p->m->stick[p->id - 1]), 1);
+	if (p->id % 2 == 0)
+	{
+		if (dining_right(p) == 1)
+			return (1);
+		return (0);
+	}
+	else
+	{
+		if (dining_left(p) == 1)
+			return (1);
+		return (0);
+	}
 }
 
 int	checking(t_philo *p)
@@ -79,7 +120,7 @@ void	*constraint(void *arg)
 	p->last_supper = p->m->start;
 	pthread_mutex_unlock(&p->m->mutex_start);
 	if (p->id % 2 == 0)
-		usleep(60000);
+		usleep(5000);
 	while (1)
 	{
 		if (thinking(p) == 1)
