@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/19 16:37:57 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/22 09:50:14 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,13 @@ void	*monitoring(void *arg)
 	t_admin			*m;
 
 	m = (t_admin *)arg;
-	pthread_mutex_lock(&m->mutex_start);
-	pthread_mutex_unlock(&m->mutex_start);
-	usleep(5000);
+	while (1)
+	{
+		pthread_mutex_lock(&m->mutex_start);
+		if (m->departure >= m->nb_philo)
+			break ;
+		pthread_mutex_unlock(&m->mutex_start);
+	}
 	while (1)
 	{
 		if (checking_die(m) == 1)

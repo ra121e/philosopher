@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/21 16:29:18 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/22 09:32:00 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ struct	s_admin
 	long			epoch;
 	long			start;
 	unsigned int	nb_philo;
+	unsigned int	departure;
 	long			time_die;
 	long			time_eat;
 	long			time_sleep;

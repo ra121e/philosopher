@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/19 16:34:35 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/22 09:32:29 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	init_admin(t_admin *m, t_philo *p)
 
 	m->epoch = 0;
 	m->nb_philo = 0;
+	m->departure = 0;
 	m->time_die = 0;
 	m->time_eat = 0;
 	m->time_sleep = 0;
