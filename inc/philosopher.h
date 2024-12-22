@@ -6,18 +6,21 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/22 09:32:00 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/22 15:16:56 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/time.h>
-#define NUM_PHILO 5
-#define DEAD 1
-#define ALIVE 0
+#ifndef PHILOSOPHER_H
+# define PHILOSOPHER_H
+
+# include <stdlib.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/time.h>
+# define NUM_PHILO 5
+# define DEAD 1
+# define ALIVE 0
 
 typedef struct s_admin	t_admin;
 typedef struct s_philo	t_philo;
@@ -77,3 +80,5 @@ int		checking(t_philo *p);
 void	*constraint(void *arg);
 void	*monitoring(void *arg);
 long	get_time(void);
+
+#endif
