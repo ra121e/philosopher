@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/22 09:50:14 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/22 16:59:38 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ void	*monitoring(void *arg)
 	{
 		pthread_mutex_lock(&m->mutex_start);
 		if (m->departure >= m->nb_philo)
+		{
+			pthread_mutex_unlock(&m->mutex_start);
 			break ;
+		}
 		pthread_mutex_unlock(&m->mutex_start);
 	}
 	while (1)
