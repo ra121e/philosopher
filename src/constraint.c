@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/22 09:33:09 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/22 14:56:56 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ void	*constraint(void *arg)
 	p->last_supper = p->m->start;
 	p->m->departure++;
 	pthread_mutex_unlock(&p->m->mutex_start);
+	if (p->id % 2 == 0)
+		usleep(5000);
 	while (1)
 	{
 		if (thinking(p) == 1)
