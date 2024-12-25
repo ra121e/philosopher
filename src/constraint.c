@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/22 14:56:56 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/25 13:43:41 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	dining(t_philo *p)
 {
 	if (solo_dining(p) == 1)
 		return (pthread_mutex_unlock(&p->m->stick[p->id - 1]), 1);
-	if (p->id % 2 == 0)
+	if ((unsigned int)p->id == p->m->nb_philo)
 	{
 		if (dining_right(p) == 1)
 			return (1);
