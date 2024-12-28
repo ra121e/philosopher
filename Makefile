@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 14:47:10 by athonda           #+#    #+#              #
-#    Updated: 2024/12/21 16:29:06 by athonda          ###   ########.fr        #
+#    Updated: 2024/12/28 14:26:37 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,26 @@ DEP = inc/philosopher.h
 IFLAGS = -Iinc
 CFLAGS = -g -Wall -Werror -Wextra
 
+BONUS = bonus
+
+SRC_BONUS_DIR = bonus
+SRC_BONUS_F = philo_bonus.c \
+
+OBJ_B =	$(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC_BONUS_F))
+
+DEP_BONUS = inc/philosopher_bonus.h
+
 $(NAME) : $(OBJ)
 	cc $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEP)
+	@mkdir -p $(OBJ_DIR)
+	cc $(CFLAGS) $(IFLAGS) -c $< -o $@
+
+$(BONUS) : $(OBJ_B)
+	cc $(CFLAGS) $(OBJ_B) -o $(BONUS)
+
+$(OBJ_DIR)/%_bonus.o: $(SRC_BONUS_DIR)/%_bonus.c $(DEP_BONUS)
 	@mkdir -p $(OBJ_DIR)
 	cc $(CFLAGS) $(IFLAGS) -c $< -o $@
 
@@ -48,5 +64,6 @@ clean:
 
 fclean: clean
 	rm $(NAME)
+	rm $(BONUS)
 
 re: fclean all
