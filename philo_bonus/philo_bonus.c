@@ -6,13 +6,13 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 20:13:56 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 23:58:37 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher_bonus.h"
 
-/*
+
 int	set_arg(t_admin *m, char **av)
 {
 	m->nb_philo = ft_atol(av[1]);
@@ -38,14 +38,13 @@ int	set_arg(t_admin *m, char **av)
 	}
 	return (1);
 }
-*/
 
 void	start_simulation(t_admin *m, t_philo *p)
 {
 	unsigned int	i;
 
 	i = 1;
-	while (i <= 5)
+	while (i <= m->nb_philo)
 	{
 		p[i].pid = fork();
 		if (p[i].pid < 0)
@@ -70,11 +69,13 @@ int	main(int ac, char **av)
 
 	(void)av;
 	(void)ac;
-//	if (ac < 5 || ac > 6)
-//	{
-//		printf("wrong argumne: ex) -> 5 800 200 200 [3]\n");
-//		return (1);
-//	}
+	if (ac < 5 || ac > 6)
+	{
+		printf("wrong argumne: ex) -> 5 800 200 200 [3]\n");
+		return (1);
+	}
+	if (!set_arg(&m, av))
+		return (0);
 	init_admin(&m);
 	start_simulation(&m, p);
 //	waitpid(p[0].pid, &status, 0);

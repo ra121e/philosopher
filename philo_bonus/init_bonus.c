@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 20:07:12 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 23:58:23 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int	init_mutex(t_admin *m)
 void	init_admin(t_admin *m)
 {
 	m->epoch = 0;
-	m->nb_philo = 0;
-	m->time_die = 0;
-	m->time_eat = 0;
-	m->time_sleep = 0;
+//	m->nb_philo = 0;
+//	m->time_die = 0;
+//	m->time_eat = 0;
+//	m->time_sleep = 0;
 	m->dead = 0;
 	m->max_eat = 0;
 	sem_unlink("/chopstick");
-	m->stick = sem_open("/chopstick", O_CREAT | O_EXCL, 0644, 3);
+	m->stick = sem_open("/chopstick", O_CREAT | O_EXCL, 0644, m->nb_philo);
 	if (m->stick == SEM_FAILED)
 		perror("sem_open error");
 }
