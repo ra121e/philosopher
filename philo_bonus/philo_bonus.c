@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/29 17:17:24 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 13:37:36 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,22 @@ int	set_arg(t_admin *m, char **av)
 int	main(int ac, char **av)
 {
 	unsigned int	i;
-	sem_t			*stick;
 	int				pid;
 	int				status;
 	int				stick_num;
+	t_admin			m;
+	t_philo			p[250];
 
-	(void)ac;
 	(void)av;
-	sem_unlink("/semaphore");
-	stick = sem_open("/semaphore", O_CREAT | O_EXCL, 0644, 5);
-	if (stick == SEM_FAILED)
-		perror("sem_open error");
-	sem_getvalue(stick, &stick_num);
+	(void)ac;
+	(void)p;
+//	if (ac < 5 || ac > 6)
+//	{
+//		printf("wrong argumne: ex) -> 5 800 200 200 [3]\n");
+//		return (1);
+//	}
+	init_admin(&m);
+	sem_getvalue(m.stick, &stick_num);
 	printf("stick num by parent: %d\n", stick_num);
 	i = 1;
 	while (i <= 5)
@@ -64,8 +68,8 @@ int	main(int ac, char **av)
 			return (0);
 		if (pid == 0)
 		{
-			stick = sem_open("/semaphore", 0);
-			sem_getvalue(stick, &stick_num);
+			m.stick = sem_open("/chopstick", 0);
+			sem_getvalue(m.stick, &stick_num);
 			printf("stick number by No.%d: %d\n", i, stick_num);
 			sleep (2);
 			exit(1);
@@ -74,8 +78,8 @@ int	main(int ac, char **av)
 	}
 	sleep(2);
 	waitpid(pid, &status, 0);
-	sem_close(stick);
-	sem_unlink("/semaphore");
+	sem_close(m.stick);
+	sem_unlink("/chopstick");
 	return (WEXITSTATUS(status));
 //	t_philo			p[250];
 //	t_admin			m;

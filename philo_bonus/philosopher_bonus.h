@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/29 17:18:48 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 13:31:15 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,12 @@ struct	s_admin
 	int				dead;
 	int				max_eat;
 	int				used[250];
+	sem_t			*stick;
 	pthread_t		pt_monitor;
-	pthread_mutex_t	mutex_start;
-	pthread_mutex_t	mutex_print;
-	pthread_mutex_t	mutex_dead;
-	pthread_mutex_t	mutex_time;
-	pthread_mutex_t	stick[250];
 	t_philo			*p;
 };
 
-void	init_admin(t_admin *m, t_philo *p);
+void	init_admin(t_admin *m);
 void	init_philo(t_philo *p, int i, t_admin *m);
 int		init_mutex(t_admin *m);
 long	ft_atol(char *str);

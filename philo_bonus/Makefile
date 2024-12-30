@@ -6,14 +6,15 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 14:47:10 by athonda           #+#    #+#              #
-#    Updated: 2024/12/29 17:13:25 by athonda          ###   ########.fr        #
+#    Updated: 2024/12/30 13:33:30 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo_bonus
 
 SRC_DIR = src
-SRC_F	=	philo_bonus.c
+SRC_F	=	philo_bonus.c \
+			init_bonus.c
 SRC = $(SRC_F:%.c=$(SRC_DIR)/%.c)
 
 OBJ_DIR = obj

@@ -6,11 +6,11 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/29 11:00:00 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 13:38:26 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher.h"
+#include "philosopher_bonus.h"
 
 /**
  * @fn init_mutex(t_admin *m)
@@ -46,26 +46,20 @@ int	init_mutex(t_admin *m)
  *
  */
 
-void	init_admin(t_admin *m, t_philo *p)
+void	init_admin(t_admin *m)
 {
-	unsigned int	i;
-
 	m->epoch = 0;
 	m->nb_philo = 0;
-	m->nb_stick = 0;
 	m->departure = 0;
 	m->time_die = 0;
 	m->time_eat = 0;
 	m->time_sleep = 0;
 	m->dead = 0;
 	m->max_eat = 0;
-	m->p = p;
 	sem_unlink("/chopstick");
 	m->stick = sem_open("/chopstick", O_CREAT | O_EXCL, 0644, 3);
 	if (m->stick == SEM_FAILED)
 		perror("sem_open error");
-	sem_getvalue(stick, &stick_num);
-	printf("stick num by parent: %d\n", stick_num);
 }
 
 /**
