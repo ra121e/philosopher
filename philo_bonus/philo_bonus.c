@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 15:19:25 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 18:18:46 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	set_arg(t_admin *m, char **av)
 void	start_simulation(t_admin *m, t_philo *p)
 {
 	unsigned int	i;
-	int				stick_num;
 
 	i = 1;
 	while (i <= 5)
@@ -53,14 +52,9 @@ void	start_simulation(t_admin *m, t_philo *p)
 			return ;
 		if (p[i].pid == 0)
 		{
-			m->stick = sem_open("/chopstick", 0);
-			if (i % 2 == 0)
-				sem_wait(m->stick);
-			else
-				sem_post(m->stick);
-			sem_getvalue(m->stick, &stick_num);
-			printf("stick number by No.%d: %d\n", i, stick_num);
-			sleep (2);
+			m->start = get_time();
+			p[i].id = i;
+			constraint(m, &p[i]);
 			exit(1);
 		}
 		i++;
