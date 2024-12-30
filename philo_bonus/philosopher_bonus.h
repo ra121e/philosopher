@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 13:31:15 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 14:08:37 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ enum e_status
 struct s_philo
 {
 	int				id;
+	int				pid;
 	long			start;
 	long			last_supper;
 	pthread_t		pt;
@@ -79,5 +80,6 @@ int		checking(t_philo *p);
 void	*constraint(void *arg);
 void	*monitoring(void *arg);
 long	get_time(void);
+void	wait_all(void);
 
 #endif
