@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 19:58:40 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:33:55 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	thinking(t_admin *m, t_philo *p)
 	long	now;
 	long	time;
 
-//	if (p->status == THINKING)
-//		return (0);
+	if (p->status == THINKING)
+		return (0);
 //		if (checking(p) == DEAD)
 //			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
 	now = get_time();
