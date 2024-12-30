@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 20:33:55 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 21:45:21 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,25 @@ int	taking_left(t_philo *p)
 	pthread_mutex_unlock(&p->m->mutex_print);
 	return (0);
 }
+*/
 
-int	taking_right(t_philo *p)
+int	taking(t_admin *m, t_philo *p)
 {
 	long	now;
 	long	time;
 
-	p->m->used[p->id % p->m->nb_philo] = 1;
-	pthread_mutex_lock(&p->m->mutex_print);
-	{
-		if (checking(p) == DEAD)
-			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
-		now = get_time();
-		time = now - p->m->start;
-		printf("%ld %d has taken a fork\n", time, p->id);
-	}
-	pthread_mutex_unlock(&p->m->mutex_print);
+//	pthread_mutex_lock(&p->m->mutex_print);
+//	{
+//		if (checking(p) == DEAD)
+//			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
+	now = get_time();
+	time = now - m->start;
+	printf("%ld %d has taken a fork\n", time, p->id);
+//	}
+//	pthread_mutex_unlock(&p->m->mutex_print);
 	return (ALIVE);
 }
-*/
+
 
 int	eating(t_admin *m, t_philo *p)
 {
@@ -59,7 +59,9 @@ int	eating(t_admin *m, t_philo *p)
 //		if (checking(p) == DEAD)
 //			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
 	sem_wait(m->stick);
+	taking(m, p);
 	sem_wait(m->stick);
+	taking(m, p);
 	now = get_time();
 	time = now - m->start;
 	p->last_supper = now;
