@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 18:18:46 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:13:56 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	start_simulation(t_admin *m, t_philo *p)
 			return ;
 		if (p[i].pid == 0)
 		{
+			init_philo(&p[i], i);
 			m->start = get_time();
 			p[i].id = i;
 			constraint(m, &p[i]);
@@ -64,7 +65,6 @@ void	start_simulation(t_admin *m, t_philo *p)
 int	main(int ac, char **av)
 {
 	int				status;
-	int				stick_num;
 	t_admin			m;
 	t_philo			p[250];
 
@@ -76,10 +76,7 @@ int	main(int ac, char **av)
 //		return (1);
 //	}
 	init_admin(&m);
-	sem_getvalue(m.stick, &stick_num);
-	printf("stick num by parent: %d\n", stick_num);
 	start_simulation(&m, p);
-	sleep(2);
 //	waitpid(p[0].pid, &status, 0);
 	wait_all();
 	sem_close(m.stick);

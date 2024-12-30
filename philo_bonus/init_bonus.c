@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 15:34:35 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:07:12 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	init_admin(t_admin *m)
  * @note
  */
 
-/*
-void	init_philo(t_philo *p, int i, t_admin *m)
+
+void	init_philo(t_philo *p, int i)
 {
 	p->id = i;
 	p->start = 0;
@@ -82,6 +82,4 @@ void	init_philo(t_philo *p, int i, t_admin *m)
 	p->tv.tv_usec = 0;
 	p->counter = 0;
 	p->full = 0;
-	p->m = m;
 }
-*/
