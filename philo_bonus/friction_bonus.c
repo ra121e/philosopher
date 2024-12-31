@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 23:54:35 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 14:03:22 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int	taking(t_admin *m, t_philo *p)
 //	{
 //		if (checking(p) == DEAD)
 //			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
+	sem_wait(m->sem_print);
 	now = get_time();
 	time = now - m->start;
 	printf("%ld %d has taken a fork\n", time, p->id);
+	sem_post(m->sem_print);
 //	}
 //	pthread_mutex_unlock(&p->m->mutex_print);
 	return (ALIVE);
@@ -62,10 +64,12 @@ int	eating(t_admin *m, t_philo *p)
 	taking(m, p);
 	sem_wait(m->stick);
 	taking(m, p);
+	sem_wait(m->sem_print);
 	now = get_time();
 	time = now - m->start;
 	p->last_supper = now;
 	printf("%ld %d is eating\n", time, p->id);
+	sem_post(m->sem_print);
 //	}
 //	pthread_mutex_unlock(&p->m->mutex_print);
 	p->status = EATING;
@@ -87,9 +91,11 @@ int	thinking(t_admin *m, t_philo *p)
 		return (0);
 //		if (checking(p) == DEAD)
 //			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
+	sem_wait(m->sem_print);
 	now = get_time();
 	time = now - m->start;
 	printf("%ld %d is thinking\n", time, p->id);
+	sem_post(m->sem_print);
 	p->status = THINKING;
 //	if (p->m->time_eat > p->m->time_sleep)
 //		usleep(p->m->time_eat - p->m->time_sleep + 1000);
@@ -109,9 +115,11 @@ int	sleeping(t_admin *m, t_philo *p)
 //	{
 //		if (checking(p) == DEAD)
 //			return (pthread_mutex_unlock(&p->m->mutex_print), DEAD);
+	sem_wait(m->sem_print);
 	now = get_time();
 	time = now - m->start;
 	printf("%ld %d is sleeping\n", time, p->id);
+	sem_post(m->sem_print);
 //	}
 //	pthread_mutex_unlock(&p->m->mutex_print);
 	p->status = SLEEPING;

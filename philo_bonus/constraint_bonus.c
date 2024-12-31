@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 11:38:33 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 14:03:26 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ void	*constraint(t_admin *m, t_philo *p)
 	{
 		if (thinking(m, p) == 1)
 			return (NULL);
+//		if (takeing(m, p) == 1)
+//			return (NULL);
 		if (eating(m, p) == 1)
 			return (NULL);
 		if (sleeping(m, p) == 1)

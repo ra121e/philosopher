@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 11:18:49 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 13:27:01 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	dying(t_admin *m)
 
 //	pthread_mutex_lock(&m->mutex_print);
 //	{
+		sem_wait(m->sem_print);
 		now = get_time();
 //		pthread_mutex_lock(&m->mutex_time);
 		elapse_time = now - m->p->last_supper;
@@ -37,6 +38,7 @@ int	dying(t_admin *m)
 //			pthread_mutex_unlock(&m->mutex_dead);
 //			return (pthread_mutex_unlock(&m->mutex_print), DEAD);
 		}
+		sem_post(m->sem_print);
 //	}
 //	pthread_mutex_unlock(&m->mutex_print);
 	return (0);
@@ -91,9 +93,6 @@ void	*monitoring(void *arg)
 	while (1)
 	{
 		if (checking_die(m) == 1)
-		{
-			printf("after checking die: \n");
 			return (NULL);
-		}
 	}
 }

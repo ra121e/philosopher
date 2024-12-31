@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 11:04:23 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 14:02:27 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ void	start_simulation(t_admin *m, t_philo *p)
 		{
 			init_philo(&p[i], i);
 			m->p = &p[i];
+//			printf("before create thread: %d\n", m->p->id);
 			pthread_create(&p[i].pt, NULL, &monitoring, m);
 			pthread_detach(p[i].pt);
-			m->start = get_time();
+//			m->start = get_time();
 			constraint(m, &p[i]);
 			exit(1);
 		}
@@ -79,6 +80,7 @@ int	main(int ac, char **av)
 	if (!set_arg(&m, av))
 		return (0);
 	init_admin(&m, &p[0]);
+	m.start = get_time();
 	start_simulation(&m, p);
 	sem_wait(m.sem_dead);
 	i = -1;
