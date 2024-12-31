@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 19:56:12 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 11:38:33 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ int	dining(t_admin *m, t_philo *p)
 void	*constraint(t_admin *m, t_philo *p)
 {
 	p->last_supper = m->start;
+//	printf("last siupper: %ld\n", p->last_supper);
 //	if (p->id % 2 == 0)
 //		usleep(5000);
 	while (1)
