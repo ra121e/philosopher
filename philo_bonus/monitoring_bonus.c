@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 13:27:01 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 14:56:48 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	dying(t_admin *m)
 		sem_wait(m->sem_print);
 		now = get_time();
 //		pthread_mutex_lock(&m->mutex_time);
-		elapse_time = now - m->p->last_supper;
+		if (m->p->last_supper == 0)
+			elapse_time = now - m->start;
+		else
+			elapse_time = now - m->p->last_supper;
 //		pthread_mutex_unlock(&m->mutex_time);
 		time = now - m->start;
 //		printf("%ld %d last supper: \n", m->p->last_supper, m->p->id);
