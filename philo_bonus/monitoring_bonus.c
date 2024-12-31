@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 14:56:48 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 15:12:18 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	dying(t_admin *m)
 	long	time;
 	long	elapse_time;
 
-//	pthread_mutex_lock(&m->mutex_print);
-//	{
 		sem_wait(m->sem_print);
 		now = get_time();
 //		pthread_mutex_lock(&m->mutex_time);
@@ -29,21 +27,15 @@ int	dying(t_admin *m)
 			elapse_time = now - m->p->last_supper;
 //		pthread_mutex_unlock(&m->mutex_time);
 		time = now - m->start;
-//		printf("%ld %d last supper: \n", m->p->last_supper, m->p->id);
-//		printf("%ld %d elapse time: \n", elapse_time, m->p->id);
 		if (elapse_time > m->time_die)
 		{
 			printf("%ld %d died\n", time, m->p->id);
-//			pthread_mutex_lock(&m->mutex_dead);
 			m->dead = DEAD;
 			sem_post(m->sem_dead);
 			return (DEAD);
-//			pthread_mutex_unlock(&m->mutex_dead);
 //			return (pthread_mutex_unlock(&m->mutex_print), DEAD);
 		}
 		sem_post(m->sem_print);
-//	}
-//	pthread_mutex_unlock(&m->mutex_print);
 	return (0);
 }
 

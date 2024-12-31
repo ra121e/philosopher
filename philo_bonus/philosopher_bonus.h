@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 13:03:26 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 15:28:45 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ long	ft_atol(char *str);
 int		sleeping(t_admin *m, t_philo *p);
 int		thinking(t_admin *m, t_philo *p);
 int		eating(t_admin *m, t_philo *p);
-int		taking_right(t_philo *p);
-int		taking_left(t_philo *p);
+int		taking(t_admin *m, t_philo *p);
 int		checking(t_philo *p);
 void	*constraint(t_admin *m, t_philo *p);
 void	*monitoring(void *arg);

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 14:03:26 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 15:32:19 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@
  * @fn int solo_dining(t_philo *p)
  * @brief in case of object number is one
  */
-/*
-int	solo_dining(t_philo *p)
+
+int	solo_dining(t_admin *m, t_philo *p)
 {
-	if (p->m->nb_philo == 1)
+	if (m->nb_philo == 1)
 	{
-		taking_left(p);
-		usleep(p->m->time_die);
+		taking(m, p);
+		usleep(m->time_die);
 		return (1);
 	}
 	return (0);
 }
-*/
+
 
 /**
  * @fn int dining_left(t_philo *p)
@@ -137,15 +137,14 @@ int	dining(t_admin *m, t_philo *p)
 void	*constraint(t_admin *m, t_philo *p)
 {
 	p->last_supper = m->start;
-//	printf("last siupper: %ld\n", p->last_supper);
+	if (solo_dining(m, p) == 1)
+		sem_wait(m->stick);
 //	if (p->id % 2 == 0)
 //		usleep(5000);
 	while (1)
 	{
 		if (thinking(m, p) == 1)
 			return (NULL);
-//		if (takeing(m, p) == 1)
-//			return (NULL);
 		if (eating(m, p) == 1)
 			return (NULL);
 		if (sleeping(m, p) == 1)
