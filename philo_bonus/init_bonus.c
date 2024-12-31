@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 23:58:23 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 08:27:27 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ void	init_admin(t_admin *m)
 	m->dead = 0;
 	m->max_eat = 0;
 	sem_unlink("/chopstick");
+	sem_unlink("/sem_dead");
 	m->stick = sem_open("/chopstick", O_CREAT | O_EXCL, 0644, m->nb_philo);
+	if (m->stick == SEM_FAILED)
+		perror("sem_open error");
+	m->sem_dead = sem_open("/sem_dead", O_CREAT | O_EXCL, 0644, 0);
 	if (m->stick == SEM_FAILED)
 		perror("sem_open error");
 }

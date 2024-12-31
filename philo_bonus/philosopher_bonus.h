@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 20:06:51 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 08:41:07 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ enum e_status
 struct s_philo
 {
 	int				id;
-	int				pid;
+	pid_t			pid;
 	long			start;
 	long			last_supper;
 	pthread_t		pt;
@@ -63,6 +63,7 @@ struct	s_admin
 	int				max_eat;
 	int				used[250];
 	sem_t			*stick;
+	sem_t			*sem_dead;
 	pthread_t		pt_monitor;
 	t_philo			*p;
 };

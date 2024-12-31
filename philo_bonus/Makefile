@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 14:47:10 by athonda           #+#    #+#              #
-#    Updated: 2024/12/30 23:52:24 by athonda          ###   ########.fr        #
+#    Updated: 2024/12/31 08:44:54 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC_DIR = src
 SRC_F	=	philo_bonus.c \
 			constraint_bonus.c \
 			friction_bonus.c \
+			monitoring_bonus.c \
 			time_bonus.c \
 			init_bonus.c \
 			util_bonus.c \

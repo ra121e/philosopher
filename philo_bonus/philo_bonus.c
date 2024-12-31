@@ -6,12 +6,11 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 23:58:37 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 08:43:24 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher_bonus.h"
-
 
 int	set_arg(t_admin *m, char **av)
 {
@@ -63,6 +62,7 @@ void	start_simulation(t_admin *m, t_philo *p)
 
 int	main(int ac, char **av)
 {
+	unsigned int	i;
 	int				status;
 	t_admin			m;
 	t_philo			p[250];
@@ -78,22 +78,16 @@ int	main(int ac, char **av)
 		return (0);
 	init_admin(&m);
 	start_simulation(&m, p);
+	sem_wait(m.sem_dead);
+	i = -1;
+	while (++i < m.nb_philo)
+		kill(p[i].pid, SIGKILL);
 //	waitpid(p[0].pid, &status, 0);
 	wait_all();
 	sem_close(m.stick);
+	sem_close(m.sem_dead);
 	sem_unlink("/chopstick");
+	sem_unlink("/sem_dead");
 	return (WEXITSTATUS(status));
-//	t_philo			p[250];
-//	t_admin			m;
-
-//	if (ac < 5 || ac > 6)
-//	{
-//		printf("wrong argument: ex) 5 800 200 200 [3]\n");
-//		return (1);
-//	}
-//	init_admin(&m, &p[0]);
-//	if (!set_arg(&m, av))
-//		return (0);
-//	start_simulation(&m, p);
 	return (0);
 }
