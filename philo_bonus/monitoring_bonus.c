@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 15:12:18 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 17:54:12 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,20 @@ void	*monitoring(void *arg)
 		if (checking_die(m) == 1)
 			return (NULL);
 	}
+}
+
+void	*checking(void *arg)
+{
+	unsigned int	i;
+	t_admin			*m;
+
+	m = (t_admin *)arg;
+	i = 0;
+	while (i < m->max_eat * m->nb_philo)
+	{
+		sem_wait(m->sem_count);
+		i++;
+	}
+	sem_post(m->sem_dead);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 15:28:45 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 17:56:09 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ struct	s_admin
 	sem_t			*stick;
 	sem_t			*sem_dead;
 	sem_t			*sem_print;
+	sem_t			*sem_count;
 	pthread_t		pt_monitor;
 	t_philo			*p;
 };
@@ -77,10 +78,11 @@ int		sleeping(t_admin *m, t_philo *p);
 int		thinking(t_admin *m, t_philo *p);
 int		eating(t_admin *m, t_philo *p);
 int		taking(t_admin *m, t_philo *p);
-int		checking(t_philo *p);
+void	*checking(void *arg);
 void	*constraint(t_admin *m, t_philo *p);
 void	*monitoring(void *arg);
 long	get_time(void);
 void	wait_all(void);
+void	clean_semaphore(t_admin *m);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 14:02:27 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 18:17:03 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	main(int ac, char **av)
 	t_admin			m;
 	t_philo			p[250];
 
-	(void)av;
-	(void)ac;
 	if (ac < 5 || ac > 6)
 	{
 		printf("wrong argumne: ex) -> 5 800 200 200 [3]\n");
@@ -80,18 +78,18 @@ int	main(int ac, char **av)
 	if (!set_arg(&m, av))
 		return (0);
 	init_admin(&m, &p[0]);
+	if (av[5])
+		pthread_create(&m.pt_monitor, NULL, &checking, &m);
 	m.start = get_time();
 	start_simulation(&m, p);
 	sem_wait(m.sem_dead);
 	i = -1;
 	while (++i < m.nb_philo)
-		kill(p[i].pid, SIGKILL);
+		kill(p[i].pid, SIGTERM);
 //	waitpid(p[0].pid, &status, 0);
+	if (av[5])
+		pthread_join(m.pt_monitor, NULL);
 	wait_all();
-	sem_close(m.stick);
-	sem_close(m.sem_dead);
-	sem_unlink("/chopstick");
-	sem_unlink("/sem_dead");
+	clean_semaphore(&m);
 	return (WEXITSTATUS(status));
-	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/25 14:47:10 by athonda           #+#    #+#              #
-#    Updated: 2024/12/31 08:44:54 by athonda          ###   ########.fr        #
+#    Updated: 2024/12/31 17:55:09 by athonda          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC_F	=	philo_bonus.c \
 			time_bonus.c \
 			init_bonus.c \
 			util_bonus.c \
+			semaphore_bonus.c \
 			wait_all_bonus.c
 SRC = $(SRC_F:%.c=$(SRC_DIR)/%.c)
 

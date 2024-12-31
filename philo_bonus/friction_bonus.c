@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 14:03:22 by athonda          ###   ########.fr       */
+/*   Updated: 2024/12/31 18:25:03 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,15 @@ int	eating(t_admin *m, t_philo *p)
 //	pthread_mutex_unlock(&p->m->mutex_print);
 	p->status = EATING;
 	p->counter++;
+	sem_post(m->sem_count);
 	usleep(m->time_eat * 1000);
 	sem_post(m->stick);
 	sem_post(m->stick);
 	if (m->max_eat > 0 && p->counter >= m->max_eat)
+	{
 		p->full = 1;
+		return (1);
+	}
 	return (0);
 }
 
@@ -109,8 +113,8 @@ int	sleeping(t_admin *m, t_philo *p)
 	long	now;
 	long	time;
 
-//	if (p->status != EATING || p->full == 1)
-//		return (0);
+	if (p->status != EATING || p->full == 1)
+		exit(0);
 //	pthread_mutex_lock(&p->m->mutex_print);
 //	{
 //		if (checking(p) == DEAD)
