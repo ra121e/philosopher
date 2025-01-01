@@ -1,0 +1,8 @@
+*.a
+*.out
+*.o
+*.pdf
+philosopher
+philo/philo
+philo/obj
+philo_bonus/philo_bonus
