@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/01 09:44:04 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/01 17:45:17 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	thinking(t_admin *m, t_philo *p)
 	sem_post(m->sem_print);
 	p->status = THINKING;
 	if (m->time_eat > m->time_sleep)
-		usleep(m->time_eat - m->time_sleep + 1000);
+		usleep((m->time_eat - m->time_sleep) * 1000 + 1000);
 	else
 		usleep(1000);
 	return (0);
