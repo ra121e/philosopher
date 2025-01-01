@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/01 13:25:45 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/01 17:08:42 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	start_simulation(t_admin *m, t_philo *p)
 int	main(int ac, char **av)
 {
 	unsigned int	i;
-	int				status;
 	t_admin			m;
 	t_philo			p[250];
 
@@ -85,5 +84,5 @@ int	main(int ac, char **av)
 		pthread_join(m.pt_monitor, NULL);
 	wait_all();
 	clean_semaphore(&m);
-	return (WEXITSTATUS(status));
+	return (0);
 }
