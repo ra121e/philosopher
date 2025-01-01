@@ -6,11 +6,17 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:40:10 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/30 23:52:48 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/01 00:00:36 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher_bonus.h"
+
+void	error_exit(char *str)
+{
+	printf("%s", str);
+	exit(1);
+}
 
 /**
  * @file util.c

@@ -6,12 +6,12 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 17:56:09 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/01 09:44:49 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-# define PHILOSOPHER_H
+#ifndef PHILOSOPHER_BONUS_H
+# define PHILOSOPHER_BONUS_H
 
 # include <stdlib.h>
 # include <sys/wait.h>
@@ -73,13 +73,14 @@ struct	s_admin
 void	init_admin(t_admin *m, t_philo *p);
 void	init_philo(t_philo *p, int i);
 int		init_mutex(t_admin *m);
+void	error_exit(char *str);
 long	ft_atol(char *str);
 int		sleeping(t_admin *m, t_philo *p);
 int		thinking(t_admin *m, t_philo *p);
 int		eating(t_admin *m, t_philo *p);
 int		taking(t_admin *m, t_philo *p);
 void	*checking(void *arg);
-void	*constraint(t_admin *m, t_philo *p);
+void	*motion(t_admin *m, t_philo *p);
 void	*monitoring(void *arg);
 long	get_time(void);
 void	wait_all(void);

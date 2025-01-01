@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 17:54:12 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/01 09:30:49 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@ int	dying(t_admin *m)
 	long	time;
 	long	elapse_time;
 
-		sem_wait(m->sem_print);
-		now = get_time();
+	sem_wait(m->sem_print);
+	now = get_time();
 //		pthread_mutex_lock(&m->mutex_time);
-		if (m->p->last_supper == 0)
-			elapse_time = now - m->start;
-		else
-			elapse_time = now - m->p->last_supper;
+	if (m->p->last_supper == 0)
+		elapse_time = now - m->start;
+	else
+		elapse_time = now - m->p->last_supper;
 //		pthread_mutex_unlock(&m->mutex_time);
-		time = now - m->start;
-		if (elapse_time > m->time_die)
-		{
-			printf("%ld %d died\n", time, m->p->id);
-			m->dead = DEAD;
-			sem_post(m->sem_dead);
-			return (DEAD);
+	time = now - m->start;
+	if (elapse_time > m->time_die)
+	{
+		printf("%ld %d died\n", time, m->p->id);
+		m->dead = DEAD;
+		sem_post(m->sem_dead);
+		return (DEAD);
 //			return (pthread_mutex_unlock(&m->mutex_print), DEAD);
-		}
-		sem_post(m->sem_print);
+	}
+	sem_post(m->sem_print);
 	return (0);
 }
 

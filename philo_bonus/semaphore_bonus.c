@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:42:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 17:56:18 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/01 09:41:36 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,4 @@ void	clean_semaphore(t_admin *m)
 	sem_unlink("/sem_dead");
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_count");
-
 }

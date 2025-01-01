@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/31 18:17:03 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/01 13:25:45 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,9 @@ void	start_simulation(t_admin *m, t_philo *p)
 		{
 			init_philo(&p[i], i);
 			m->p = &p[i];
-//			printf("before create thread: %d\n", m->p->id);
 			pthread_create(&p[i].pt, NULL, &monitoring, m);
 			pthread_detach(p[i].pt);
-//			m->start = get_time();
-			constraint(m, &p[i]);
+			motion(m, &p[i]);
 			exit(1);
 		}
 		i++;
@@ -71,10 +69,7 @@ int	main(int ac, char **av)
 	t_philo			p[250];
 
 	if (ac < 5 || ac > 6)
-	{
-		printf("wrong argumne: ex) -> 5 800 200 200 [3]\n");
-		return (1);
-	}
+		error_exit("wrong argumne: ex) -> 5 800 200 200 [3]\n");
 	if (!set_arg(&m, av))
 		return (0);
 	init_admin(&m, &p[0]);
@@ -86,7 +81,6 @@ int	main(int ac, char **av)
 	i = -1;
 	while (++i < m.nb_philo)
 		kill(p[i].pid, SIGTERM);
-//	waitpid(p[0].pid, &status, 0);
 	if (av[5])
 		pthread_join(m.pt_monitor, NULL);
 	wait_all();
