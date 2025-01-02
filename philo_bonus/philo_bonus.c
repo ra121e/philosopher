@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/02 15:52:24 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/02 23:29:12 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	set_arg(t_admin *m, char **av)
 	m->time_sleep = ft_atol(av[4]);
 	if (av[5])
 		m->max_eat = ft_atol(av[5]);
+	else
+		m->max_eat = 0;
 	if (m->time_die < 60 || m->time_eat < 60 || m->time_sleep < 60)
 	{
 		printf("Do not test with time set to values lower than 60 ms!\n");
