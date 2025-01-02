@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/01 17:08:42 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/02 15:52:24 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	main(int ac, char **av)
 	m.start = get_time();
 	start_simulation(&m, p);
 	sem_wait(m.sem_dead);
-	i = -1;
-	while (++i < m.nb_philo)
+	i = 0;
+	while (++i <= m.nb_philo)
 		kill(p[i].pid, SIGTERM);
 	if (av[5])
 		pthread_join(m.pt_monitor, NULL);
