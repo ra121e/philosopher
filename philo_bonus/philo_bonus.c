@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/01 17:08:42 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/02 15:05:07 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	start_simulation(t_admin *m, t_philo *p)
 		p[i].pid = fork();
 		if (p[i].pid < 0)
 			return ;
-		if (p[i].pid == 0)
+		else if (p[i].pid == 0)
 		{
 			init_philo(&p[i], i);
 			m->p = &p[i];
@@ -57,13 +57,14 @@ void	start_simulation(t_admin *m, t_philo *p)
 			motion(m, &p[i]);
 			exit(1);
 		}
+		else
+			printf("pid in parent: %d\n", p[i].pid);
 		i++;
 	}
 }
 
 int	main(int ac, char **av)
 {
-	unsigned int	i;
 	t_admin			m;
 	t_philo			p[250];
 
@@ -73,13 +74,12 @@ int	main(int ac, char **av)
 		return (0);
 	init_admin(&m, &p[0]);
 	if (av[5])
-		pthread_create(&m.pt_monitor, NULL, &checking, &m);
+		pthread_create(&m.pt_monitor, NULL, &checking_full, &m);
+	pthread_create(&m.pt_terminator, NULL, &checking_dead, &m);
 	m.start = get_time();
 	start_simulation(&m, p);
-	sem_wait(m.sem_dead);
-	i = -1;
-	while (++i < m.nb_philo)
-		kill(p[i].pid, SIGTERM);
+	printf("p[1].pid: %d\n", p[1].pid);
+	pthread_join(m.pt_terminator, NULL);
 	if (av[5])
 		pthread_join(m.pt_monitor, NULL);
 	wait_all();
