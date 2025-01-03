@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:40:10 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/20 19:55:47 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/03 19:48:48 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,11 @@ long	ft_atol(char *str)
 		num = num * 10 + *number - '0';
 		number++;
 	}
-	return (num);
+	if (num > 2147483647)
+	{
+		printf("number should be lower than INT_MAX\n");
+		return (0);
+	}
+	else
+		return (num);
 }
