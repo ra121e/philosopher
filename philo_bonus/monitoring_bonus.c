@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/01 09:30:49 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/03 00:19:45 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	dying(t_admin *m)
 	{
 		printf("%ld %d died\n", time, m->p->id);
 		m->dead = DEAD;
-		sem_post(m->sem_dead);
+		sem_post(m->sem_deadcheck);
 		return (DEAD);
 //			return (pthread_mutex_unlock(&m->mutex_print), DEAD);
 	}
@@ -104,6 +104,6 @@ void	*checking(void *arg)
 		sem_wait(m->sem_count);
 		i++;
 	}
-	sem_post(m->sem_dead);
+	sem_post(m->sem_deadcheck);
 	return (NULL);
 }

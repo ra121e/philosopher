@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/01 09:44:49 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/03 00:18:05 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ struct	s_admin
 	int				max_eat;
 	int				used[250];
 	sem_t			*stick;
-	sem_t			*sem_dead;
+	sem_t			*sem_deadcheck;
 	sem_t			*sem_print;
 	sem_t			*sem_count;
 	pthread_t		pt_monitor;
@@ -84,6 +84,7 @@ void	*motion(t_admin *m, t_philo *p);
 void	*monitoring(void *arg);
 long	get_time(void);
 void	wait_all(void);
+void	open_semaphore(t_admin *m);
 void	clean_semaphore(t_admin *m);
 
 #endif

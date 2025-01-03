@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/02 23:29:12 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/03 00:18:33 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int ac, char **av)
 		pthread_create(&m.pt_monitor, NULL, &checking, &m);
 	m.start = get_time();
 	start_simulation(&m, p);
-	sem_wait(m.sem_dead);
+	sem_wait(m.sem_deadcheck);
 	i = 0;
 	while (++i <= m.nb_philo)
 		kill(p[i].pid, SIGTERM);
