@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/01 09:38:11 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/04 14:05:51 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_admin(t_admin *m, t_philo *p)
 	sem_unlink("/sem_dead");
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_count");
+	sem_unlink("/sem_time");
 	m->stick = sem_open("/chopstick", O_CREAT | O_EXCL, 0644, m->nb_philo);
 	if (m->stick == SEM_FAILED)
 		perror("sem_open error");
@@ -41,6 +42,9 @@ void	init_admin(t_admin *m, t_philo *p)
 		perror("sem_open error");
 	m->sem_count = sem_open("/sem_count", O_CREAT | O_EXCL, 0644, 0);
 	if (m->sem_count == SEM_FAILED)
+		perror("sem_open error");
+	m->sem_time = sem_open("/sem_time", O_CREAT | O_EXCL, 0644, 1);
+	if (m->sem_time == SEM_FAILED)
 		perror("sem_open error");
 }
 

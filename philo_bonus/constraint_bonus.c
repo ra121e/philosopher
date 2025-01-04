@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/03 19:37:42 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/04 14:09:25 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int	solo_dining(t_admin *m, t_philo *p)
 
 void	*motion(t_admin *m, t_philo *p)
 {
+	sem_wait(m->sem_time);
 	p->last_supper = m->start;
+	sem_post(m->sem_time);
 	if (solo_dining(m, p) == 1)
 		sem_wait(m->stick);
 	if (p->id % 2 == 0)

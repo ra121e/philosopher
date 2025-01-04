@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/04 09:46:39 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/04 10:46:22 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,30 @@ void	start_simulation(t_admin *m, t_philo *p)
 	}
 }
 
-int	main(int ac, char **av)
+void	end_simulation(t_admin *m, t_philo *p)
 {
 	unsigned int	i;
+
+	sem_wait(m->sem_dead);
+	i = 0;
+	while (++i <= m->nb_philo)
+		kill(p[i].pid, SIGTERM);
+}
+
+int	main(int ac, char **av)
+{
 	t_admin			m;
 	t_philo			p[250];
 
 	if (ac < 5 || ac > 6)
-		error_exit("wrong argumne: ex) -> 5 800 200 200 [3]\n");
+		return (printf("wrong argumne: ex) -> 5 800 200 200 [3]\n"), 0);
 	if (!set_arg(&m, av))
 		return (0);
 	init_admin(&m, &p[0]);
 	if (av[5])
 		pthread_create(&m.pt_monitor, NULL, &checking, &m);
 	start_simulation(&m, p);
-	sem_wait(m.sem_dead);
-	i = 0;
-	while (++i <= m.nb_philo)
-		kill(p[i].pid, SIGTERM);
+	end_simulation(&m, p);
 	if (av[5])
 		pthread_join(m.pt_monitor, NULL);
 	wait_all();
