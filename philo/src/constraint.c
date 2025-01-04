@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:41:53 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/22 14:56:56 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:09:29 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,11 @@ void	*constraint(void *arg)
 
 	p = (t_philo *)arg;
 	pthread_mutex_lock(&p->m->mutex_start);
+	if (p->m->epoch == 1)
+	{
+		pthread_mutex_unlock(&p->m->mutex_start);
+		return (NULL);
+	}
 	p->last_supper = p->m->start;
 	p->m->departure++;
 	pthread_mutex_unlock(&p->m->mutex_start);
@@ -152,5 +157,4 @@ void	*constraint(void *arg)
 		if (p->full == 1)
 			return (NULL);
 	}
-	return (NULL);
 }

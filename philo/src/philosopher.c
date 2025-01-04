@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:07:25 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/21 16:16:10 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:04:33 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ void	start_simulation(t_admin *m, t_philo *p)
 		init_philo(&p[i], i, m);
 		ret = pthread_create(&p[i].pt, NULL, &constraint, &p[i]);
 		if (ret != 0)
+		{
+			m->epoch = 1;
+			pthread_mutex_unlock(&m->mutex_start);
 			return ;
+		}
 		usleep(100);
 		i++;
 	}
