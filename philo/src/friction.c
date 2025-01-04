@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:30:19 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/01 18:07:57 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/04 13:25:32 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ int	eating(t_philo *p)
 	p->counter++;
 	usleep(p->m->time_eat * 1000);
 	if (p->m->max_eat > 0 && p->counter >= p->m->max_eat)
+	{
+		pthread_mutex_lock(&p->m->mutex_full);
 		p->full = 1;
+		pthread_mutex_unlock(&p->m->mutex_full);
+	}
 	return (0);
 }
 

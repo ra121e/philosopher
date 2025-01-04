@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/22 09:32:29 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/04 13:18:40 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	init_mutex(t_admin *m)
 	pthread_mutex_init(&m->mutex_print, NULL);
 	pthread_mutex_init(&m->mutex_dead, NULL);
 	pthread_mutex_init(&m->mutex_time, NULL);
+	pthread_mutex_init(&m->mutex_full, NULL);
 	i = 0;
 	while (i <= m->nb_philo)
 	{

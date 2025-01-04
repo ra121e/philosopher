@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2024/12/22 16:59:38 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/04 13:42:20 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,15 @@ int	checking_die(t_admin *m)
 
 	nb_eating = 0;
 	i = 0;
-	while (++i <= m->nb_philo && m->p[i].full == 0)
+	while (++i <= m->nb_philo)
 	{
+		pthread_mutex_lock(&m->mutex_full);
+		if (m->p[i].full != 0)
+		{
+			pthread_mutex_unlock(&m->mutex_full);
+			continue ;
+		}
+		pthread_mutex_unlock(&m->mutex_full);
 		if (dying(m, i) == 1)
 			return (DEAD);
 		nb_eating++;
