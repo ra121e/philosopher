@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/02 23:29:12 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/04 09:46:39 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	start_simulation(t_admin *m, t_philo *p)
 {
 	unsigned int	i;
 
+	m->start = get_time();
 	i = 1;
 	while (i <= m->nb_philo)
 	{
@@ -76,7 +77,6 @@ int	main(int ac, char **av)
 	init_admin(&m, &p[0]);
 	if (av[5])
 		pthread_create(&m.pt_monitor, NULL, &checking, &m);
-	m.start = get_time();
 	start_simulation(&m, p);
 	sem_wait(m.sem_dead);
 	i = 0;
