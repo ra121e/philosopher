@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/04 14:05:51 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/05 14:51:10 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,11 @@ void	init_admin(t_admin *m, t_philo *p)
 	m->start = 0;
 	m->dead = 0;
 	m->p = p;
-	sem_unlink("/chopstick");
-	sem_unlink("/sem_dead");
-	sem_unlink("/sem_print");
-	sem_unlink("/sem_count");
-	sem_unlink("/sem_time");
-	m->stick = sem_open("/chopstick", O_CREAT | O_EXCL, 0644, m->nb_philo);
-	if (m->stick == SEM_FAILED)
-		perror("sem_open error");
-	m->sem_dead = sem_open("/sem_dead", O_CREAT | O_EXCL, 0644, 0);
-	if (m->sem_dead == SEM_FAILED)
-		perror("sem_open error");
-	m->sem_print = sem_open("/sem_print", O_CREAT | O_EXCL, 0644, 1);
-	if (m->sem_print == SEM_FAILED)
-		perror("sem_open error");
-	m->sem_count = sem_open("/sem_count", O_CREAT | O_EXCL, 0644, 0);
-	if (m->sem_count == SEM_FAILED)
-		perror("sem_open error");
-	m->sem_time = sem_open("/sem_time", O_CREAT | O_EXCL, 0644, 1);
-	if (m->sem_time == SEM_FAILED)
-		perror("sem_open error");
+	m->stick = NULL;
+	m->sem_dead = NULL;
+	m->sem_print = NULL;
+	m->sem_count = NULL;
+	m->sem_time = NULL;
 }
 
 /**

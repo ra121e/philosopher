@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/04 14:12:19 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/05 14:42:25 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ struct	s_admin
 
 void	init_admin(t_admin *m, t_philo *p);
 void	init_philo(t_philo *p, int i);
+int		init_semaphore(t_admin *m);
 int		init_mutex(t_admin *m);
 void	error_exit(char *str);
 long	ft_atol(char *str);

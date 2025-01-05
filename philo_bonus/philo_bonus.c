@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/04 10:46:22 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/05 14:49:03 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ int	main(int ac, char **av)
 		return (printf("wrong argumne: ex) -> 5 800 200 200 [3]\n"), 0);
 	if (!set_arg(&m, av))
 		return (0);
-	init_admin(&m, &p[0]);
+	init_admin(&m, p);
+	if (init_semaphore(&m) == 1)
+		return (clean_semaphore(&m), 0);
 	if (av[5])
 		pthread_create(&m.pt_monitor, NULL, &checking, &m);
 	start_simulation(&m, p);
