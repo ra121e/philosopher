@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/05 14:49:03 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/06 10:21:13 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,13 @@ void	end_simulation(t_admin *m, t_philo *p)
 	sem_wait(m->sem_dead);
 	i = 0;
 	while (++i <= m->nb_philo)
+	{
 		kill(p[i].pid, SIGTERM);
+	}
+	sem_wait(m->sem_finish);
+	m->dead = 1;
+	sem_post(m->sem_finish);
+	sem_post(m->sem_count);
 }
 
 int	main(int ac, char **av)

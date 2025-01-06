@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/05 14:42:25 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/06 09:28:14 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ struct	s_admin
 	sem_t			*sem_print;
 	sem_t			*sem_count;
 	sem_t			*sem_time;
+	sem_t			*sem_finish;
 	pthread_t		pt_monitor;
 	t_philo			*p;
 };

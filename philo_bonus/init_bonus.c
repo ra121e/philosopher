@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:01:19 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/05 14:51:10 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/06 10:26:06 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_admin(t_admin *m, t_philo *p)
 	m->sem_print = NULL;
 	m->sem_count = NULL;
 	m->sem_time = NULL;
+	m->sem_finish = NULL;
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:20:35 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/04 14:16:26 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/06 10:20:32 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,18 @@ void	*checking(void *arg)
 	i = 0;
 	while (i < m->max_eat * m->nb_philo)
 	{
-		sem_wait(m->sem_count);
-		i++;
+		sem_wait(m->sem_finish);
+		if (m->dead == 1)
+		{
+			sem_post(m->sem_finish);
+			return (NULL);
+		}
+		else
+		{
+			sem_post(m->sem_finish);
+			sem_wait(m->sem_count);
+			i++;
+		}
 	}
 	sem_post(m->sem_dead);
 	return (NULL);

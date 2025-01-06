@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:42:19 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/05 14:54:21 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/06 10:26:32 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	init_semaphore(t_admin *m)
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_count");
 	sem_unlink("/sem_time");
+	sem_unlink("/sem_finish");
 	m->stick = sem_open("/chopstick", O_CREAT | O_EXCL, 0644, m->nb_philo);
 	if (m->stick == SEM_FAILED)
 		return (printf("sem_open error"), 1);
@@ -33,6 +34,9 @@ int	init_semaphore(t_admin *m)
 		return (printf("sem_open error"), 1);
 	m->sem_time = sem_open("/sem_time", O_CREAT | O_EXCL, 0644, 1);
 	if (m->sem_time == SEM_FAILED)
+		return (printf("sem_open error"), 1);
+	m->sem_finish = sem_open("/sem_finish", O_CREAT | O_EXCL, 0644, 1);
+	if (m->sem_finish == SEM_FAILED)
 		return (printf("sem_open error"), 1);
 	return (0);
 }
@@ -49,9 +53,12 @@ void	clean_semaphore(t_admin *m)
 		sem_close(m->sem_count);
 	if (m->sem_time)
 		sem_close(m->sem_time);
+	if (m->sem_finish)
+		sem_close(m->sem_finish);
 	sem_unlink("/chopstick");
 	sem_unlink("/sem_dead");
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_count");
 	sem_unlink("/sem_time");
+	sem_unlink("/sem_finish");
 }
