@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:40:10 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/03 18:01:43 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/10 19:21:19 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,13 @@ char	*check_num(char *str)
 	if (!ft_is_digit(*str))
 		return (printf("forbidden none number\n"), NULL);
 	number = str;
-	while (ft_is_digit(*str++))
+	while (ft_is_digit(*str))
+	{
+		str++;
 		len++;
+	}
+	if (*str != '\0')
+		return (printf("forbidden none number\n"), NULL);
 	if (len > 10)
 		return (printf("number shoule be untill INT_MAX \n"), NULL);
 	return (number);

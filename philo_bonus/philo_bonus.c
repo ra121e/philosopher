@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/10 17:28:25 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/10 19:23:18 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,26 @@ int	set_arg(t_admin *m, char **av)
 {
 	m->nb_philo = ft_atol(av[1]);
 	if (m->nb_philo <= 0)
-	{
-		printf("philosopher number should be more than 0\n");
-		return (0);
-	}
+		return (printf("philosopher should be more than 0 number\n"), 0);
 	if (m->nb_philo > 200)
-	{
-		printf("Do not test with more than 200 philo!\n");
-		return (0);
-	}
+		return (printf("Do not test with more than 200 philo!\n"), 0);
 	m->time_die = ft_atol(av[2]);
+	if (m->time_die == 0)
+		return (printf("time to die should be more than 0 number\n"), 0);
 	m->time_eat = ft_atol(av[3]);
+	if (m->time_eat == 0)
+		return (printf("time to eat should be more than 0 number\n"), 0);
 	m->time_sleep = ft_atol(av[4]);
+	if (m->time_sleep == 0)
+		return (printf("time to sleep should be more than 0 number\n"), 0);
 	if (av[5])
-		m->max_eat = ft_atol(av[5]);
-	else
-		m->max_eat = 0;
-	if (m->time_die < 60 || m->time_eat < 60 || m->time_sleep < 60)
 	{
-		printf("Do not test with time set to values lower than 60 ms!\n");
-		return (0);
+		m->max_eat = ft_atol(av[5]);
+		if (m->max_eat == 0)
+			return (printf("eat option should be more than 0 number\n"), 0);
 	}
+	if (m->time_die < 60 || m->time_eat < 60 || m->time_sleep < 60)
+		return (printf("Do not test with time lower than 60 ms!\n"), 0);
 	return (1);
 }
 
