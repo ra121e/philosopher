@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 22:55:41 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/06 10:21:13 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/10 17:28:25 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	end_simulation(t_admin *m, t_philo *p)
 	i = 0;
 	while (++i <= m->nb_philo)
 	{
-		kill(p[i].pid, SIGTERM);
+		kill(p[i].pid, SIGKILL);
 	}
 	sem_wait(m->sem_finish);
 	m->dead = 1;
