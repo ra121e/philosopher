@@ -6,7 +6,7 @@
 /*   By: athonda <athonda@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:18:21 by athonda           #+#    #+#             */
-/*   Updated: 2025/01/06 09:28:14 by athonda          ###   ########.fr       */
+/*   Updated: 2025/01/10 19:27:47 by athonda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <signal.h>
 # define NUM_PHILO 5
 # define DEAD 1
 # define ALIVE 0
